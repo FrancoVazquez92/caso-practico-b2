@@ -10,9 +10,10 @@ class TProductos extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         columns: const [
-          DataColumn(label: Text('Nombre')),
-          DataColumn(label: Text('Edad')),
-          DataColumn(label: Text('Ciudad')),
+          DataColumn(label: Text('Codigo')),
+          DataColumn(label: Text('Descripcion')),
+          DataColumn(label: Text('Precio')),
+          DataColumn(label: Text('Imagen')),
         ],
         rows: const [
           DataRow(cells: [
