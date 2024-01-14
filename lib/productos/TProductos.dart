@@ -13,7 +13,6 @@ class TProductos extends StatelessWidget {
           DataColumn(label: Text('Codigo')),
           DataColumn(label: Text('Descripcion')),
           DataColumn(label: Text('Precio')),
-          DataColumn(label: Text('Imagen')),
         ],
         rows: const [
           DataRow(cells: [

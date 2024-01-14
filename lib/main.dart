@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:prueba/api/firebase_service.dart';
 import 'package:prueba/productos/TProductos.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -15,7 +22,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'PRODUCTOS'),
@@ -45,7 +51,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const TProductos(),
+      body: FutureBuilder(
+          future: getProductos(),
+          builder: ((context, snapshot) {
+            return ListView.builder(
+              itemCount: (snapshot.data as List?)?.length ?? 0,
+              itemBuilder: ((context, index) {
+                return Text((snapshot.data as List?)?[index]['Descripcion']);
+              }),
+            );
+          })),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
